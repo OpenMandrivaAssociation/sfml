@@ -29,6 +29,7 @@ BuildRequires:	libx11-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	openal-devel
 BuildRequires:	sndfile-devel
+BuildRequires:	recode
 #for samples
 BuildRequires:	qt4-devel
 BuildRequires:	wxGTK2.8-devel
