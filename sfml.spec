@@ -153,7 +153,7 @@ recode l1..u8 *.txt
 # fix samples build
 perl -pi -e "s|export LDFLAGS  =|export LDFLAGS  = -L%{_libdir} -L../../lib|" \
  samples/Makefile SFML-%{version}/samples/Makefile
-perl -pi -e "s|-I/usr/include/qt4|-I%{_libdir}/qt4/include|" \
+perl -pi -e "s|-I/usr/include/qt4|-I/usr/lib/qt4/include|" \
  samples/qt/Makefile SFML-%{version}/samples/qt/Makefile
 
 # fix samples data location
