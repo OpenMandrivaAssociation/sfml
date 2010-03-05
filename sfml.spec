@@ -1,6 +1,6 @@
 Name:			sfml
 Version:		1.5
-Release:		%mkrel 1
+Release:		%mkrel 2
 
 %define	major		1
 %define	minor		5
@@ -59,7 +59,7 @@ This package contains documentation and samples.
 Summary:	Header files from %{name}-audio
 Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
-Requires:	libsfml-audio = %{version}
+Requires:	%{libname_a} = %{version}
 Provides:	%{name}-audio-devel = %{version}-%{release}
 
 %description -n %{develname_a}
@@ -69,7 +69,7 @@ Includes files for developing programs based on %{name}-audio.
 Summary:	Header files from %{name}-graphics
 Group:		Development/C++
 Requires:	sfml-window-devel = %{version}
-Requires:	libsfml-grahics = %{version}
+Requires:	%{libname_g} = %{version}
 Provides:	%{name}-graphics-devel = %{version}-%{release}
 
 %description -n %{develname_g}
@@ -79,7 +79,7 @@ Includes files for developing programs based on %{name}-graphics.
 Summary:	Header files from %{name}-network
 Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
-Requires:	libsfml-network = %{version}
+Requires:	%{libname_n} = %{version}
 Provides:	%{name}-network-devel = %{version}-%{release}
 
 %description -n %{develname_n}
@@ -88,7 +88,7 @@ Includes files for developing programs based on %{name}-network.
 %package -n %{develname_s}
 Summary:	Header files from %{name}-system
 Group:		Development/C++
-Requires:	libsfml-system = %{version}
+Requires:	%{libname_s} = %{version}
 Provides:	%{name}-system-devel = %{version}-%{release}
 
 %description -n %{develname_s}
@@ -98,7 +98,7 @@ Includes files for developing programs based on %{name}-system.
 Summary:	Header files from %{name}-window
 Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
-Requires:	libsfml-window = %{version}
+Requires:	%{libname_w} = %{version}
 Provides:	%{name}-window-devel = %{version}-%{release}
 
 %description -n %{develname_w}
