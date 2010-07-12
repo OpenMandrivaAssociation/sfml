@@ -1,9 +1,9 @@
 Name:			sfml
-Version:		1.5
-Release:		%mkrel 2
+Version:		1.6
+Release:		%mkrel 1
 
 %define	major		1
-%define	minor		5
+%define	minor		6
 %define	libname_a	%mklibname sfml-audio %major.%minor
 %define develname_a	%mklibname sfml-audio -d
 %define	libname_g	%mklibname sfml-graphics %major.%minor
@@ -19,8 +19,9 @@ Summary:	Simple and Fast Multimedia Library
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/sfml
-Source0:	http://sourceforge.net/projects/sfml/files/sfml/1.5/SFML-1.5-sdk-linux-32.tar.gz
-Source1:	http://sourceforge.net/projects/sfml/files/sfml/1.5/SFML-1.5-sdk-linux-64.tar.gz
+Source0:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
+Source1:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-64.tar.gz
+Patch0:         samples-qt-Makefile-qt-inc-path.patch
 
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
@@ -146,6 +147,7 @@ Dynamic libraries from %{name}-window.
 
 %prep
 %setup -q -a1 -n SFML-%{version}
+%patch0 -p0 -b .qtincpath
 perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" SFML-%{version}/src/SFML/Makefile
 perl -pi -e "s|\r\n|\n|g" *.txt
 recode l1..u8 *.txt
@@ -169,12 +171,11 @@ cd SFML-%{version}
 %make
 #samples
 pushd lib
-for i in *.so* ; do ln -s $i ${i%.1.5} ; done
+for i in *.so* ; do ln -s $i ${i%.1.6} ; done
 popd
 pushd samples
 %make 
 popd
-rm -f lib/*.so
 
 %install
 rm -rf %{buildroot}
@@ -192,11 +193,6 @@ cp -R ./samples/* %{buildroot}%{_datadir}/%{name}/samples/
 install -d -m 755 %{buildroot}%{_bindir}
 for i in %{buildroot}%{_datadir}/%{name}/samples/bin/[!d]* ; do \
  mv $i %{buildroot}%{_bindir}/sfml-sample-`basename $i` ; done
-
-# fix links
-pushd %{buildroot}%{_libdir}
-for i in *.so ; do rm -f $i ; ln -s $i.* $i ; done
-popd
 
 %clean
 rm -rf %{buildroot}
@@ -241,21 +237,21 @@ rm -rf %{buildroot}
 
 %files -n %{libname_a}
 %defattr(0644,root,root,0755)
-%{_libdir}/libsfml-audio.so.1.5
+%{_libdir}/libsfml-audio.so.%{major}.%{minor}
 
 %files -n %{libname_g}
 %defattr(0644,root,root,0755)
-%{_libdir}/libsfml-graphics.so.1.5
+%{_libdir}/libsfml-graphics.so.%{major}.%{minor}
 
 %files -n %{libname_n}
 %defattr(0644,root,root,0755)
-%{_libdir}/libsfml-network.so.1.5
+%{_libdir}/libsfml-network.so.%{major}.%{minor}
 
 %files -n %{libname_s}
 %defattr(0644,root,root,0755)
-%{_libdir}/libsfml-system.so.1.5
+%{_libdir}/libsfml-system.so.%{major}.%{minor}
 
 %files -n %{libname_w}
 %defattr(0644,root,root,0755)
-%{_libdir}/libsfml-window.so.1.5
+%{_libdir}/libsfml-window.so.%{major}.%{minor}
 
