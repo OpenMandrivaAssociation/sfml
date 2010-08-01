@@ -1,6 +1,6 @@
 Name:			sfml
 Version:		1.6
-Release:		%mkrel 1
+Release:		%mkrel 2
 
 %define	major		1
 %define	minor		6
