@@ -20,7 +20,6 @@ License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/sfml
 Source0:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
-Source1:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-64.tar.gz
 Patch0:         samples-qt-Makefile-qt-inc-path.patch
 
 BuildRequires:	mesagl-devel
@@ -146,28 +145,26 @@ Provides:	%{name}-window = %{version}-%{release}
 Dynamic libraries from %{name}-window.
 
 %prep
-%setup -q -a1 -n SFML-%{version}
+%setup -q -n SFML-%{version}
+rm -f lib/*.so*
 %patch0 -p0 -b .qtincpath
-perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" SFML-%{version}/src/SFML/Makefile
+%ifarch x86_64
+perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" src/SFML/Makefile
+%endif
 perl -pi -e "s|\r\n|\n|g" *.txt
 recode l1..u8 *.txt
 
 # fix samples build
 perl -pi -e "s|export LDFLAGS  =|export LDFLAGS  = -L%{_libdir} -L../../lib|" \
- samples/Makefile SFML-%{version}/samples/Makefile
+ samples/Makefile
 perl -pi -e "s|-I/usr/include/qt4|-I/usr/lib/qt4/include|" \
- samples/qt/Makefile SFML-%{version}/samples/qt/Makefile
+ samples/qt/Makefile
 
 # fix samples data location
 find samples -name "*.cpp" -exec perl -pi -e \
  "s|datas|%{_datadir}/%{name}/samples/bin/datas|g" {} +
-find SFML-%{version}/samples -name "*.cpp" -exec perl -pi -e \
- "s|datas|%{_datadir}/%{name}/samples/bin/datas|g" {} +
 
 %build
-%ifarch x86_64
-cd SFML-%{version}
-%endif
 %make
 #samples
 pushd lib
@@ -179,9 +176,6 @@ popd
 
 %install
 rm -rf %{buildroot}
-%ifarch x86_64
-cd SFML-%{version}
-%endif
 %makeinstall_std DESTDIR=%{buildroot}%{_prefix}
 
 # install sample source and data
