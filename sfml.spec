@@ -4,6 +4,7 @@ Release:		%mkrel 1
 
 %define	major		1
 %define	minor		6
+
 %define	libname_a	%mklibname sfml-audio %major.%minor
 %define develname_a	%mklibname sfml-audio -d
 %define	libname_g	%mklibname sfml-graphics %major.%minor
@@ -15,12 +16,30 @@ Release:		%mkrel 1
 %define	libname_w	%mklibname sfml-window %major.%minor
 %define develname_w	%mklibname sfml-window -d
 
+%define	cname		c%{name}
+
+%define	libname_ac	%mklibname csfml-audio %major.%minor
+%define develname_ac	%mklibname csfml-audio -d
+%define	libname_gc	%mklibname csfml-graphics %major.%minor
+%define develname_gc	%mklibname csfml-graphics -d
+%define	libname_nc	%mklibname csfml-network %major.%minor
+%define develname_nc	%mklibname csfml-network -d
+%define	libname_sc	%mklibname csfml-system %major.%minor
+%define develname_sc	%mklibname csfml-system -d
+%define	libname_wc	%mklibname csfml-window %major.%minor
+%define develname_wc	%mklibname csfml-window -d
+
 Summary:	Simple and Fast Multimedia Library
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/sfml
 Source0:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
+Source1:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz
+# real links:
+# wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz/download
+# wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz/download
 Patch0:         samples-qt-Makefile-qt-inc-path.patch
+Patch1:         sfml-c-makefile.patch
 
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
@@ -54,6 +73,9 @@ The library is divided in 5 small packages :
  - window
 
 This package contains documentation and samples.
+
+########################################################
+# C++ libs
 
 %package -n %{develname_a}
 Summary:	Header files from %{name}-audio
@@ -144,15 +166,124 @@ Provides:	%{name}-window = %{version}-%{release}
 %description -n %{libname_w}
 Dynamic libraries from %{name}-window.
 
+########################################################
+# C libs
+
+%package -n %{develname_ac}
+Summary:	Header files from %{cname}-audio
+Group:		Development/C
+Requires:	sfml-system-devel = %{version}
+Requires:	%{libname_ac} = %{version}
+Requires:	%{libname_a} = %{version}
+Provides:	%{cname}-audio-devel = %{version}-%{release}
+
+%description -n %{develname_ac}
+Includes files for developing programs based on %{cname}-audio.
+
+%package -n %{develname_gc}
+Summary:	Header files from %{cname}-graphics
+Group:		Development/C
+Requires:	sfml-window-devel = %{version}
+Requires:	%{libname_gc} = %{version}
+Requires:	%{libname_g} = %{version}
+Provides:	%{cname}-graphics-devel = %{version}-%{release}
+
+%description -n %{develname_gc}
+Includes files for developing programs based on %{cname}-graphics.
+
+%package -n %{develname_nc}
+Summary:	Header files from %{cname}-network
+Group:		Development/C
+Requires:	sfml-system-devel = %{version}
+Requires:	%{libname_nc} = %{version}
+Requires:	%{libname_n} = %{version}
+Provides:	%{cname}-network-devel = %{version}-%{release}
+
+%description -n %{develname_nc}
+Includes files for developing programs based on %{cname}-network.
+
+%package -n %{develname_sc}
+Summary:	Header files from %{cname}-system
+Group:		Development/C
+Requires:	%{libname_sc} = %{version}
+Requires:	%{libname_s} = %{version}
+Provides:	%{cname}-system-devel = %{version}-%{release}
+
+%description -n %{develname_sc}
+Includes files for developing programs based on %{cname}-system.
+
+%package -n %{develname_wc}
+Summary:	Header files from %{cname}-window
+Group:		Development/C
+Requires:	sfml-system-devel = %{version}
+Requires:	%{libname_wc} = %{version}
+Requires:	%{libname_w} = %{version}
+Provides:	%{cname}-window-devel = %{version}-%{release}
+
+%description -n %{develname_wc}
+Includes files for developing programs based on %{cname}-window.
+
+%package -n %{libname_ac}
+Summary:	Dynamic libraries from %{cname}-audio
+Group:		System/Libraries
+Requires:	%{libname_a} = %{version}
+Provides:	%{cname}-audio = %{version}-%{release}
+
+%description -n %{libname_ac}
+Dynamic libraries from %{cname}-audio.
+
+%package -n %{libname_gc}
+Summary:	Dynamic libraries from %{cname}-graphics
+Group:		System/Libraries
+Requires:	%{libname_g} = %{version}
+Provides:	%{cname}-graphics = %{version}-%{release}
+
+%description -n %{libname_gc}
+Dynamic libraries from %{cname}-graphics.
+
+%package -n %{libname_nc}
+Summary:	Dynamic libraries from %{cname}-network
+Group:		System/Libraries
+Requires:	%{libname_n} = %{version}
+Provides:	%{cname}-network = %{version}-%{release}
+
+%description -n %{libname_nc}
+Dynamic libraries from %{cname}-network.
+
+%package -n %{libname_sc}
+Summary:	Dynamic libraries from %{cname}-system
+Group:		System/Libraries
+Requires:	%{libname_s} = %{version}
+Provides:	%{cname}-system = %{version}-%{release}
+
+%description -n %{libname_sc}
+Dynamic libraries from %{cname}-system.
+
+%package -n %{libname_wc}
+Summary:	Dynamic libraries from %{cname}-window
+Group:		System/Libraries
+Requires:	%{libname_w} = %{version}
+Provides:	%{cname}-window = %{version}-%{release}
+
+%description -n %{libname_wc}
+Dynamic libraries from %{cname}-window.
+
+########################################################
+
 %prep
-%setup -q -n SFML-%{version}
+%setup -q -b1 -n SFML-%{version}
 rm -f lib/*.so*
 %patch0 -p0 -b .qtincpath
+%patch1 -p0 -b .csfml
 %ifarch x86_64
 perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" src/SFML/Makefile
 %endif
 perl -pi -e "s|\r\n|\n|g" *.txt
 recode l1..u8 *.txt
+
+%ifarch x86_64
+perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" CSFML/src/SFML/Makefile
+%endif
 
 # fix samples build
 perl -pi -e "s|export LDFLAGS  =|export LDFLAGS  = -L%{_libdir} -L../../lib|" \
@@ -173,10 +304,17 @@ popd
 pushd samples
 %make 
 popd
+pushd CSFML
+%make
+popd
 
 %install
 rm -rf %{buildroot}
 %makeinstall_std DESTDIR=%{buildroot}%{_prefix}
+
+pushd CSFML
+%makeinstall_std DESTDIR=%{buildroot}%{_prefix}
+popd
 
 # install sample source and data
 rm -f %{buildroot}%{_datadir}/%{name}/samples/*/*.o
@@ -196,6 +334,9 @@ rm -rf %{buildroot}
 %doc *.txt doc/*
 %attr(0755,root,root) %{_bindir}/sfml-sample-*
 %{_datadir}/%{name}/samples
+
+##############################
+# C++ libs
 
 %files -n %{develname_a}
 %defattr(0644,root,root,0755)
@@ -248,4 +389,59 @@ rm -rf %{buildroot}
 %files -n %{libname_w}
 %defattr(0644,root,root,0755)
 %{_libdir}/libsfml-window.so.%{major}.%{minor}
+
+##############################
+# C libs
+
+%files -n %{develname_ac}
+%defattr(0644,root,root,0755)
+%{_includedir}/SFML/Audio.h
+%{_includedir}/SFML/Audio
+%{_libdir}/libcsfml-audio.so
+
+%files -n %{develname_gc}
+%defattr(0644,root,root,0755)
+%{_includedir}/SFML/Graphics.h
+%{_includedir}/SFML/Graphics
+%{_libdir}/libcsfml-graphics.so
+
+%files -n %{develname_nc}
+%defattr(0644,root,root,0755)
+%{_includedir}/SFML/Network.h
+%{_includedir}/SFML/Network
+%{_libdir}/libcsfml-network.so
+
+%files -n %{develname_sc}
+%defattr(0644,root,root,0755)
+%dir %{_includedir}/SFML
+%{_includedir}/SFML/Config.h
+%{_includedir}/SFML/System.h
+%{_includedir}/SFML/System
+%{_libdir}/libcsfml-system.so
+
+%files -n %{develname_wc}
+%defattr(0644,root,root,0755)
+%{_includedir}/SFML/Window.h
+%{_includedir}/SFML/Window
+%{_libdir}/libcsfml-window.so
+
+%files -n %{libname_ac}
+%defattr(0644,root,root,0755)
+%{_libdir}/libcsfml-audio.so.%{major}.%{minor}
+
+%files -n %{libname_gc}
+%defattr(0644,root,root,0755)
+%{_libdir}/libcsfml-graphics.so.%{major}.%{minor}
+
+%files -n %{libname_nc}
+%defattr(0644,root,root,0755)
+%{_libdir}/libcsfml-network.so.%{major}.%{minor}
+
+%files -n %{libname_sc}
+%defattr(0644,root,root,0755)
+%{_libdir}/libcsfml-system.so.%{major}.%{minor}
+
+%files -n %{libname_wc}
+%defattr(0644,root,root,0755)
+%{_libdir}/libcsfml-window.so.%{major}.%{minor}
 
