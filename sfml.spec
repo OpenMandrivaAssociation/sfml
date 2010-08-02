@@ -1,6 +1,6 @@
 Name:			sfml
 Version:		1.6
-Release:		%mkrel 2
+Release:		%mkrel 3
 
 %define	major		1
 %define	minor		6
@@ -40,6 +40,7 @@ Source1:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-
 # wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz/download
 Patch0:         samples-qt-Makefile-qt-inc-path.patch
 Patch1:         sfml-c-makefile.patch
+Patch2:         rem-included-libs.patch
 
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
@@ -273,8 +274,13 @@ Dynamic libraries from %{cname}-window.
 %prep
 %setup -q -b1 -n SFML-%{version}
 rm -f lib/*.so*
+# removing included libs
+rm -rf src/SFML/Graphics/libjpeg/
+rm -rf src/SFML/Graphics/libpng/
+rm -rf src/SFML/Graphics/zlib/
 %patch0 -p0 -b .qtincpath
 %patch1 -p0 -b .csfml
+%patch2 -p1 -b .inclibs
 %ifarch x86_64
 perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" src/SFML/Makefile
 %endif
