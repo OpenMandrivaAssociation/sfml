@@ -1,3 +1,5 @@
+%define	_duplicate_files_terminate_build 0
+
 Name:			sfml
 Version:		1.6
 Release:		%mkrel 4
@@ -85,6 +87,7 @@ Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_a} = %{version}
 Provides:	%{name}-audio-devel = %{version}-%{release}
+Conflicts:	%{develname_ac}
 
 %description -n %{develname_a}
 Includes files for developing programs based on %{name}-audio.
@@ -95,6 +98,7 @@ Group:		Development/C++
 Requires:	sfml-window-devel = %{version}
 Requires:	%{libname_g} = %{version}
 Provides:	%{name}-graphics-devel = %{version}-%{release}
+Conflicts:	%{develname_gc}
 
 %description -n %{develname_g}
 Includes files for developing programs based on %{name}-graphics.
@@ -105,6 +109,7 @@ Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_n} = %{version}
 Provides:	%{name}-network-devel = %{version}-%{release}
+Conflicts:	%{develname_nc}
 
 %description -n %{develname_n}
 Includes files for developing programs based on %{name}-network.
@@ -114,6 +119,7 @@ Summary:	Header files from %{name}-system
 Group:		Development/C++
 Requires:	%{libname_s} = %{version}
 Provides:	%{name}-system-devel = %{version}-%{release}
+Conflicts:	%{develname_sc}
 
 %description -n %{develname_s}
 Includes files for developing programs based on %{name}-system.
@@ -124,6 +130,7 @@ Group:		Development/C++
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_w} = %{version}
 Provides:	%{name}-window-devel = %{version}-%{release}
+Conflicts:	%{develname_wc}
 
 %description -n %{develname_w}
 Includes files for developing programs based on %{name}-window.
@@ -312,7 +319,7 @@ pushd lib
 for i in *.so* ; do ln -s $i ${i%.1.6} ; done
 popd
 pushd samples
-%make 
+%make
 popd
 pushd CSFML
 %make
@@ -330,6 +337,7 @@ popd
 rm -f %{buildroot}%{_datadir}/%{name}/samples/*/*.o
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/samples
 cp -R ./samples/* %{buildroot}%{_datadir}/%{name}/samples/
+rm -f %{buildroot}%{_datadir}/%{name}/samples/*/*.o
 
 # install sample binaries to sfml-sample*
 install -d -m 755 %{buildroot}%{_bindir}
