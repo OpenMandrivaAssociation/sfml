@@ -1,46 +1,46 @@
 Name:			sfml
 Version:		1.6
-Release:		%mkrel 3
+Release:		%mkrel 4
 
 %define	major		1
 %define	minor		6
 
-%define	libname_a	%mklibname sfml-audio %major.%minor
+%define	libname_a	%mklibname sfml-audio %{major}.%{minor}
 %define develname_a	%mklibname sfml-audio -d
-%define	libname_g	%mklibname sfml-graphics %major.%minor
+%define	libname_g	%mklibname sfml-graphics %{major}.%{minor}
 %define develname_g	%mklibname sfml-graphics -d
-%define	libname_n	%mklibname sfml-network %major.%minor
+%define	libname_n	%mklibname sfml-network %{major}.%{minor}
 %define develname_n	%mklibname sfml-network -d
-%define	libname_s	%mklibname sfml-system %major.%minor
+%define	libname_s	%mklibname sfml-system %{major}.%{minor}
 %define develname_s	%mklibname sfml-system -d
-%define	libname_w	%mklibname sfml-window %major.%minor
+%define	libname_w	%mklibname sfml-window %{major}.%{minor}
 %define develname_w	%mklibname sfml-window -d
 
 %define	cname		c%{name}
 
-%define	libname_ac	%mklibname csfml-audio %major.%minor
+%define	libname_ac	%mklibname csfml-audio %{major}.%{minor}
 %define develname_ac	%mklibname csfml-audio -d
-%define	libname_gc	%mklibname csfml-graphics %major.%minor
+%define	libname_gc	%mklibname csfml-graphics %{major}.%{minor}
 %define develname_gc	%mklibname csfml-graphics -d
-%define	libname_nc	%mklibname csfml-network %major.%minor
+%define	libname_nc	%mklibname csfml-network %{major}.%{minor}
 %define develname_nc	%mklibname csfml-network -d
-%define	libname_sc	%mklibname csfml-system %major.%minor
+%define	libname_sc	%mklibname csfml-system %{major}.%{minor}
 %define develname_sc	%mklibname csfml-system -d
-%define	libname_wc	%mklibname csfml-window %major.%minor
+%define	libname_wc	%mklibname csfml-window %{major}.%{minor}
 %define develname_wc	%mklibname csfml-window -d
 
 Summary:	Simple and Fast Multimedia Library
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/sfml
-Source0:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
-Source1:        http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz
+Source0:	http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
+Source1:	http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz
 # real links:
 # wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz/download
 # wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz/download
-Patch0:         samples-qt-Makefile-qt-inc-path.patch
-Patch1:         sfml-c-makefile.patch
-Patch2:         rem-included-libs.patch
+Patch0:		samples-qt-Makefile-qt-inc-path.patch
+Patch1:		sfml-c-makefile.patch
+Patch2:		rem-included-libs.patch
 
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
@@ -52,9 +52,7 @@ BuildRequires:	sndfile-devel
 BuildRequires:	recode
 #for samples
 BuildRequires:	qt4-devel
-BuildRequires:	wxGTK2.8-devel
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRequires:	wxgtku-devel
 
 %description
 SFML is a portable and easy to use multimedia API written in C++.
