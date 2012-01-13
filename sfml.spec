@@ -41,6 +41,9 @@ Source1:	http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{versi
 Patch0:		samples-qt-Makefile-qt-inc-path.patch
 Patch1:		sfml-c-makefile.patch
 Patch2:		rem-included-libs.patch
+Patch3:		SFML-1.6-png15.patch
+Patch4:		SFML-1.6-gcc46.patch
+Patch5:		SFML-1.6-dso.patch
 
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
@@ -279,6 +282,9 @@ rm -rf src/SFML/Graphics/zlib/
 %patch0 -p0 -b .qtincpath
 %patch1 -p0 -b .csfml
 %patch2 -p1 -b .inclibs
+%patch3 -p1 -b .png15
+%patch4 -p1 -b .gcc46
+%patch5 -p1 -b .dso
 %ifarch x86_64
 perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" src/SFML/Makefile
 %endif
