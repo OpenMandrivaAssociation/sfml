@@ -1,0 +1,65 @@
+diff -r -u SFML-1.6.orig/src/SFML/Graphics/ImageLoader.cpp SFML-1.6/src/SFML/Graphics/ImageLoader.cpp
+--- SFML-1.6.orig/src/SFML/Graphics/ImageLoader.cpp	2010-01-27 15:00:05.000000000 +0100
++++ SFML-1.6/src/SFML/Graphics/ImageLoader.cpp	2010-08-02 23:12:22.000000000 +0200
+@@ -28,10 +28,10 @@
+ #include <SFML/Graphics/ImageLoader.hpp>
+ extern "C"
+ {
+-    #include <SFML/Graphics/libjpeg/jpeglib.h>
+-    #include <SFML/Graphics/libjpeg/jerror.h>
++    #include <jpeglib.h>
++    #include <jerror.h>
+ }
+-#include <SFML/Graphics/libpng/png.h>
++#include <png.h>
+ #include <SFML/Graphics/SOIL/SOIL.h>
+ #include <iostream>
+ 
+diff -r -u SFML-1.6.orig/src/SFML/Graphics/Makefile SFML-1.6/src/SFML/Graphics/Makefile
+--- SFML-1.6.orig/src/SFML/Graphics/Makefile	2010-01-27 15:00:05.000000000 +0100
++++ SFML-1.6/src/SFML/Graphics/Makefile	2010-08-02 23:29:19.000000000 +0200
+@@ -1,15 +1,9 @@
+ SRC     = $(wildcard *.cpp)
+ SRCGLEW = $(wildcard ./GLEW/*.c)
+-SRCJPEG = $(wildcard ./libjpeg/*.c)
+-SRCPNG  = $(wildcard ./libpng/*.c)
+ SRCSOIL = $(wildcard ./SOIL/*.c)
+-SRCZLIB = $(wildcard ./zlib/*.c)
+ OBJ     = $(SRC:.cpp=.o)
+ OBJGLEW = $(SRCGLEW:.c=.o)
+-OBJJPEG = $(SRCJPEG:.c=.o)
+-OBJPNG  = $(SRCPNG:.c=.o)
+ OBJSOIL = $(SRCSOIL:.c=.o)
+-OBJZLIB = $(SRCZLIB:.c=.o)
+ 
+ ifeq ($(STATIC), yes)
+     LIB     = libsfml-graphics-s.a
+@@ -23,22 +17,22 @@
+ 
+ all: $(LIB)
+ 
+-libsfml-graphics-s.a: $(OBJ) $(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB)
+-	$(AR) $(ARFLAGS) $(LIBNAME) $(OBJ) $(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB)
++libsfml-graphics-s.a: $(OBJ) $(OBJGLEW) $(OBJSOIL)
++	$(AR) $(ARFLAGS) $(LIBNAME) $(OBJ) $(OBJGLEW) $(OBJSOIL)
+ 
+-libsfml-graphics.so: $(OBJ) $(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB)
+-	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) $(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB) -lfreetype -lX11 -lGL
++libsfml-graphics.so: $(OBJ) $(OBJGLEW) $(OBJSOIL)
++	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) $(OBJGLEW) $(OBJSOIL) -lfreetype -lX11 -lGL -ljpeg -lpng -lz
+ 
+ $(OBJ): %.o: %.cpp
+ 	$(CPP) -o $@ -c $< $(CFLAGS) -I/usr/include/freetype2
+ 
+-$(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB): %.o: %.c
++$(OBJGLEW) $(OBJSOIL): %.o: %.c
+ 	$(CC) -o $@ -c $< $(CFLAGSEXT) -DSTBI_FAILURE_USERMSG
+ 
+ .PHONY: clean mrproper
+ 
+ clean:
+-	@rm -rf $(OBJ) $(OBJGLEW) $(OBJJPEG) $(OBJPNG) $(OBJSOIL) $(OBJZLIB)
++	@rm -rf $(OBJ) $(OBJGLEW) $(OBJSOIL)
+ 
+ mrproper: clean
+ 	@rm -rf $(LIBNAME)

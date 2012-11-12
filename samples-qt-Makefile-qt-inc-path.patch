@@ -1,0 +1,18 @@
+--- samples/qt/Makefile~	2010-01-27 14:55:12.000000000 +0100
++++ samples/qt/Makefile	2010-07-12 17:59:25.000000000 +0200
+@@ -1,5 +1,6 @@
+ EXEC = qt
+ OBJ  = Main.o QSFMLCanvas.o
++QT_INC_PATH = /usr/lib/qt4/include
+ 
+ all: $(EXEC)
+ 
+@@ -7,7 +8,7 @@
+ 	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJ) -lsfml-graphics -lsfml-window -lsfml-system -lQtCore -lQtGui -lX11
+ 
+ %.o: %.cpp
+-	$(CC) -o $@ -c $< $(CFLAGS) -I/usr/include/qt4 -I/usr/include/qt4/QtCore -I/usr/include/qt4/QtGui
++	$(CC) -o $@ -c $< $(CFLAGS) -I$(QT_INC_PATH) -I$(QT_INC_PATH)/QtCore -I$(QT_INC_PATH)/QtGui
+ 
+ .PHONY: clean mrproper
+ 

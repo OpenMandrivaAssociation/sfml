@@ -1,0 +1,24 @@
+diff -urN SFML-1.6/samples/window/Makefile SFML-1.6-patched/samples/window/Makefile
+--- SFML-1.6/samples/window/Makefile	2010-01-27 23:55:29.000000000 +1000
++++ SFML-1.6-patched/samples/window/Makefile	2012-01-13 20:27:46.695601142 +1100
+@@ -4,7 +4,7 @@
+ all: $(EXEC)
+ 
+ window: $(OBJ)
+-	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJ) -lsfml-window -lsfml-system -lGLU
++	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJ) -lsfml-window -lsfml-system -lGLU -lGL
+ 
+ %.o: %.cpp
+ 	$(CC) -o $@ -c $< $(CFLAGS)
+diff -urN SFML-1.6/samples/wxwidgets/Makefile SFML-1.6-patched/samples/wxwidgets/Makefile
+--- SFML-1.6/samples/wxwidgets/Makefile	2010-01-27 23:55:12.000000000 +1000
++++ SFML-1.6-patched/samples/wxwidgets/Makefile	2012-01-13 20:31:32.877907236 +1100
+@@ -4,7 +4,7 @@
+ all: $(EXEC)
+ 
+ wxwidgets: $(OBJ)
+-	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJ) -lsfml-graphics -lsfml-window -lsfml-system `wx-config --libs` `pkg-config --libs gtk+-2.0`
++	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJ) -lsfml-graphics -lsfml-window -lsfml-system `wx-config --libs` `pkg-config --libs gtk+-2.0` -lX11
+ 
+ %.o: %.cpp
+ 	$(CC) -o $@ -c $< $(CFLAGS) -I/usr/include/gtk-2.0 `wx-config --cppflags` `pkg-config --cflags gtk+-2.0`

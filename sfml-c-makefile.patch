@@ -1,0 +1,12 @@
+--- CSFML/src/SFML/Makefile.orig	2010-08-01 23:30:50.000000000 +0200
++++ CSFML/src/SFML/Makefile	2010-08-01 21:56:31.000000000 +0200
+@@ -1,7 +1,7 @@
+ export CC         = gcc
+ export CPP        = g++
+-export CFLAGS     = -W -Wall -pedantic -fPIC -Wno-unused -I../.. -I../../../include -DNDEBUG -DCSFML_EXPORTS -O2
+-export LDFLAGS    = -shared
++export CFLAGS     = -W -Wall -pedantic -fPIC -Wno-unused -I../.. -I../../../include -I../../../../include -DNDEBUG -DCSFML_EXPORTS -O2
++export LDFLAGS    = -shared -L../../../../lib
+ export LIBPATH    = ../../../lib
+ export VERSION    = 1.6
+ export CP         = cp
