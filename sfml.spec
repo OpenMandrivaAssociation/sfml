@@ -2,7 +2,7 @@
 
 Name:			sfml
 Version:		1.6
-Release:		%mkrel 4
+Release:		6
 
 %define	major		1
 %define	minor		6
@@ -44,16 +44,16 @@ Patch0:		samples-qt-Makefile-qt-inc-path.patch
 Patch1:		sfml-c-makefile.patch
 Patch2:		rem-included-libs.patch
 Patch3:		SFML-1.6-png15.patch
-Patch4:		SFML-1.6-gcc46.patch
+Patch4:		SFML-1.6-gcc4.7.patch
 Patch5:		SFML-1.6-dso.patch
 
-BuildRequires:	mesagl-devel
-BuildRequires:	mesaglu-devel
-BuildRequires:	freetype2-devel
-BuildRequires:	libx11-devel
-BuildRequires:	libxrandr-devel
-BuildRequires:	openal-devel
-BuildRequires:	sndfile-devel
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	pkgconfig(openal)
+BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	recode
 #for samples
 BuildRequires:	qt4-devel
@@ -326,7 +326,6 @@ pushd CSFML
 popd
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std DESTDIR=%{buildroot}%{_prefix}
 
 pushd CSFML
@@ -343,9 +342,6 @@ rm -f %{buildroot}%{_datadir}/%{name}/samples/*/*.o
 install -d -m 755 %{buildroot}%{_bindir}
 for i in %{buildroot}%{_datadir}/%{name}/samples/bin/[!d]* ; do \
  mv $i %{buildroot}%{_bindir}/sfml-sample-`basename $i` ; done
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(0644,root,root,0755)
@@ -389,23 +385,23 @@ rm -rf %{buildroot}
 %{_libdir}/libsfml-window.so
 
 %files -n %{libname_a}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libsfml-audio.so.%{major}.%{minor}
 
 %files -n %{libname_g}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libsfml-graphics.so.%{major}.%{minor}
 
 %files -n %{libname_n}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libsfml-network.so.%{major}.%{minor}
 
 %files -n %{libname_s}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libsfml-system.so.%{major}.%{minor}
 
 %files -n %{libname_w}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libsfml-window.so.%{major}.%{minor}
 
 ##############################
@@ -444,22 +440,51 @@ rm -rf %{buildroot}
 %{_libdir}/libcsfml-window.so
 
 %files -n %{libname_ac}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libcsfml-audio.so.%{major}.%{minor}
 
 %files -n %{libname_gc}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libcsfml-graphics.so.%{major}.%{minor}
 
 %files -n %{libname_nc}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libcsfml-network.so.%{major}.%{minor}
 
 %files -n %{libname_sc}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libcsfml-system.so.%{major}.%{minor}
 
 %files -n %{libname_wc}
-%defattr(0644,root,root,0755)
+%defattr(0755,root,root,0755)
 %{_libdir}/libcsfml-window.so.%{major}.%{minor}
+
+
+
+%changelog
+* Fri Jan 13 2012 Andrey Bondrov <abondrov@mandriva.org> 1.6-4
++ Revision: 760614
+- Deal with duplicate files issue, drop .o files from packaged samples
+- Fix build against png15, some other minor build fixes
+- Rebuild against utf8 wxGTK2.8, minor spec cleanup
+
+* Tue Aug 03 2010 Florent Monnier <blue_prawn@mandriva.org> 1.6-3mdv2011.0
++ Revision: 565181
+- removed included libs that may cause segfaults
+- increm mkrel
+- providing the C libs too
+
+* Sun Aug 01 2010 Florent Monnier <blue_prawn@mandriva.org> 1.6-1mdv2011.0
++ Revision: 564874
+- only one source tarball
+- updated to last version 1.6
+
+* Fri Mar 05 2010 Shlomi Fish <shlomif@mandriva.org> 1.5-2mdv2010.1
++ Revision: 514783
+- Fixed the requires - libsfml-network is needed (thanks to Zombie)
+
+* Tue Sep 15 2009 Guillaume Bedot <littletux@mandriva.org> 1.5-1mdv2010.0
++ Revision: 443012
+- First package of SFML for Mandriva
+- create sfml
 
