@@ -427,7 +427,6 @@ for i in %{buildroot}%{_datadir}/%{name}/samples/bin/[!d]* ; do \
 
 %files -n %{develname_sc}
 %defattr(0644,root,root,0755)
-%dir %{_includedir}/SFML
 %{_includedir}/SFML/Config.h
 %{_includedir}/SFML/System.h
 %{_includedir}/SFML/System
