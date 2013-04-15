@@ -1,5 +1,7 @@
 %define	_duplicate_files_terminate_build 0
 
+%define debug_package %{nil}
+
 Name:			sfml
 Version:		1.6
 Release:		6
