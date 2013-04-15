@@ -184,6 +184,7 @@ Group:		Development/C
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_ac} = %{version}
 Requires:	%{libname_a} = %{version}
+Requires:	%{develname_a} = %{version}
 Provides:	%{cname}-audio-devel = %{version}-%{release}
 
 %description -n %{develname_ac}
@@ -195,6 +196,7 @@ Group:		Development/C
 Requires:	sfml-window-devel = %{version}
 Requires:	%{libname_gc} = %{version}
 Requires:	%{libname_g} = %{version}
+Requires:	%{develname_g} = %{version}
 Provides:	%{cname}-graphics-devel = %{version}-%{release}
 
 %description -n %{develname_gc}
@@ -206,6 +208,7 @@ Group:		Development/C
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_nc} = %{version}
 Requires:	%{libname_n} = %{version}
+Requires:	%{develname_n} = %{version}
 Provides:	%{cname}-network-devel = %{version}-%{release}
 
 %description -n %{develname_nc}
@@ -216,6 +219,7 @@ Summary:	Header files from %{cname}-system
 Group:		Development/C
 Requires:	%{libname_sc} = %{version}
 Requires:	%{libname_s} = %{version}
+Requires:	%{develname_s} = %{version}
 Provides:	%{cname}-system-devel = %{version}-%{release}
 
 %description -n %{develname_sc}
@@ -227,6 +231,7 @@ Group:		Development/C
 Requires:	sfml-system-devel = %{version}
 Requires:	%{libname_wc} = %{version}
 Requires:	%{libname_w} = %{version}
+Requires:	%{develname_w} = %{version}
 Provides:	%{cname}-window-devel = %{version}-%{release}
 
 %description -n %{develname_wc}
@@ -410,32 +415,27 @@ for i in %{buildroot}%{_datadir}/%{name}/samples/bin/[!d]* ; do \
 %files -n %{develname_ac}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Audio.h
-%{_includedir}/SFML/Audio
 %{_libdir}/libcsfml-audio.so
 
 %files -n %{develname_gc}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Graphics.h
-%{_includedir}/SFML/Graphics
 %{_libdir}/libcsfml-graphics.so
 
 %files -n %{develname_nc}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Network.h
-%{_includedir}/SFML/Network
 %{_libdir}/libcsfml-network.so
 
 %files -n %{develname_sc}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Config.h
 %{_includedir}/SFML/System.h
-%{_includedir}/SFML/System
 %{_libdir}/libcsfml-system.so
 
 %files -n %{develname_wc}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Window.h
-%{_includedir}/SFML/Window
 %{_libdir}/libcsfml-window.so
 
 %files -n %{libname_ac}
