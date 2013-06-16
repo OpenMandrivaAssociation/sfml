@@ -48,6 +48,7 @@ Patch2:		rem-included-libs.patch
 Patch3:		SFML-1.6-png15.patch
 Patch4:		SFML-1.6-gcc4.7.patch
 Patch5:		SFML-1.6-dso.patch
+Patch6:		SFML-1.6-png16.patch
 
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
@@ -299,6 +300,7 @@ rm -rf src/SFML/Graphics/zlib/
 %patch3 -p1 -b .png15
 %patch4 -p1 -b .gcc46
 %patch5 -p1 -b .dso
+%patch6 -p1 -b .png16~
 %ifarch x86_64
 perl -pi -e "s|DESTDIR\)/lib|DESTDIR\)/lib64|" src/SFML/Makefile
 %endif

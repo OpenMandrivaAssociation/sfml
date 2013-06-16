@@ -1,0 +1,10 @@
+--- SFML-1.6/src/SFML/Graphics/ImageLoader.cpp.omv~	2013-06-16 12:22:19.803085999 +0200
++++ SFML-1.6/src/SFML/Graphics/ImageLoader.cpp	2013-06-16 12:22:29.556508262 +0200
+@@ -31,6 +31,7 @@ extern "C"
+     #include <jpeglib.h>
+     #include <jerror.h>
+ }
++#include <string.h>
+ #include <png.h>
+ #include <SFML/Graphics/SOIL/SOIL.h>
+ #include <iostream>
