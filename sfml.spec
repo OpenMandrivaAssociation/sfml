@@ -4,7 +4,7 @@
 
 Name:			sfml
 Version:		1.6
-Release:		12
+Release:		13
 
 %define	major		1
 %define	minor		6
@@ -39,6 +39,7 @@ Group:		System/Libraries
 URL:		http://sourceforge.net/projects/sfml
 Source0:	http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz
 Source1:	http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz
+Source3:	sfml.rpmlintrc
 # real links:
 # wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz/download
 # wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz/download
