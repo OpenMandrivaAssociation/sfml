@@ -4,7 +4,7 @@
 
 Name:			sfml
 Version:		1.6
-Release:		14
+Release:		15
 
 %define	major		1
 %define	minor		6
