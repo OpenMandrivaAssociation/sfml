@@ -45,7 +45,10 @@ BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(udev)
 BuildRequires:	recode
+BuildRequires:	cmake
+BuildRequires:	ninja
 #for samples
 BuildRequires:	qt4-devel
 BuildRequires:	wxgtku-devel
@@ -68,6 +71,16 @@ The library is divided in 5 small packages :
  - window
 
 This package contains documentation and samples.
+
+%package examples
+Summary:	Examples for the %{name} library
+Group:		Development/C++
+
+%description examples
+Examples for the %{name} library
+
+%files examples
+%{_datadir}/SFML/examples
 
 ########################################################
 # C++ libs
@@ -164,7 +177,10 @@ Dynamic libraries from %{name}-window.
 
 %prep
 %setup -q -a1 -n SFML-%{version}
-%cmake -G Ninja
+%cmake \
+	-DSFML_BUILD_EXAMPLES:BOOL=ON \
+	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
+	-G Ninja
 
 %build
 ninja -C build
@@ -185,6 +201,7 @@ DESTDIR=%{buildroot} ninja -C build install
 %{_includedir}/SFML/Audio.hpp
 %{_includedir}/SFML/Audio
 %{_libdir}/libsfml-audio.so
+%{_libdir}/pkgconfig/sfml-audio.pc
 
 %files -n %{develname_g}
 %defattr(0644,root,root,0755)
@@ -192,12 +209,14 @@ DESTDIR=%{buildroot} ninja -C build install
 %{_includedir}/SFML/OpenGL.hpp
 %{_includedir}/SFML/Graphics
 %{_libdir}/libsfml-graphics.so
+%{_libdir}/pkgconfig/sfml-graphics.pc
 
 %files -n %{develname_n}
 %defattr(0644,root,root,0755)
 %{_includedir}/SFML/Network.hpp
 %{_includedir}/SFML/Network
 %{_libdir}/libsfml-network.so
+%{_libdir}/pkgconfig/sfml-network.pc
 
 %files -n %{develname_s}
 %defattr(0644,root,root,0755)
@@ -207,6 +226,8 @@ DESTDIR=%{buildroot} ninja -C build install
 %{_includedir}/SFML/Main.hpp
 %{_includedir}/SFML/System
 %{_libdir}/libsfml-system.so
+%{_libdir}/pkgconfig/sfml-all.pc
+%{_libdir}/pkgconfig/sfml-system.pc
 %{_datadir}/SFML/cmake
 
 %files -n %{develname_w}
@@ -214,6 +235,7 @@ DESTDIR=%{buildroot} ninja -C build install
 %{_includedir}/SFML/Window.hpp
 %{_includedir}/SFML/Window
 %{_libdir}/libsfml-window.so
+%{_libdir}/pkgconfig/sfml-window.pc
 
 %files -n %{libname_a}
 %defattr(0755,root,root,0755)
