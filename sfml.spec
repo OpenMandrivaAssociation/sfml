@@ -27,16 +27,6 @@ URL:		http://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
 Source3:	sfml.rpmlintrc
-# real links:
-# wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-sdk-linux-32.tar.gz/download
-# wget http://sourceforge.net/projects/sfml/files/sfml/%{version}/SFML-%{version}-c-sdk-linux-32.tar.gz/download
-Patch0:		samples-qt-Makefile-qt-inc-path.patch
-Patch1:		sfml-c-makefile.patch
-Patch2:		rem-included-libs.patch
-Patch3:		SFML-1.6-png15.patch
-Patch4:		SFML-1.6-gcc4.7.patch
-Patch5:		SFML-1.6-dso.patch
-Patch6:		SFML-1.6-png16.patch
 
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
@@ -46,6 +36,7 @@ BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(udev)
+BuildRequires:	pkgconfig(xcb-image)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
