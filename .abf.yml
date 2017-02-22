@@ -1,5 +1,3 @@
 sources:
-  "SFML-1.6-c-sdk-linux-32.tar.gz": a1266484200e847bbd453960896bdf924e45477a
-  "SFML-1.6-sdk-linux-32.tar.gz": 85e3e0a73982678c2c0ab32275be7e365822d69c
-  SFML-2.3.1-sources.zip: a3dd454acffdd00c37584c4a14f4982dc23178a2
-  SFML-2.3.1-doc.zip: 23a8f5f9e1860b94a56634937cf3ecad6110bba4
+  SFML-2.4.2-doc.zip: 058d4a725292363af4dbda2c2362f40df16ec386
+  SFML-2.4.2-sources.zip: 9cb3cdf2f679a4979f71d36041c950a82a31178a

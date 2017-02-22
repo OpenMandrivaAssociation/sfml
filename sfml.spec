@@ -3,7 +3,7 @@
 %define debug_package %{nil}
 
 Name:			sfml
-Version:		2.3.1
+Version:		2.4.2
 Release:		1
 
 %define	major		%(echo %{version} |cut -d. -f1)
@@ -27,7 +27,9 @@ URL:		http://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
 Source3:	sfml.rpmlintrc
-
+# patch for link failue __cpu_model undefined.  Adjusted to
+# work with clang
+Patch1:		3383b4a472f0bd16a8161fb8760cd3e6333f1782.patch
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(freetype2)
@@ -168,6 +170,7 @@ Dynamic libraries from %{name}-window.
 
 %prep
 %setup -q -a1 -n SFML-%{version}
+%apply_patches
 %cmake \
 	-DSFML_BUILD_EXAMPLES:BOOL=ON \
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
