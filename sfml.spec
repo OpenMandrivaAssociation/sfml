@@ -4,7 +4,7 @@
 
 Name:			sfml
 Version:		2.4.2
-Release:		2
+Release:		3
 
 %define	major		%(echo %{version} |cut -d. -f1)
 %define	minor		%(echo %{version} |cut -d. -f2)
