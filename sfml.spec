@@ -39,6 +39,7 @@ BuildRequires:	pkgconfig(udev)
 BuildRequires:	pkgconfig(xcb-image)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(flac)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
