@@ -37,6 +37,8 @@ BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	pkgconfig(xcb-image)
+BuildRequires:	pkgconfig(ogg)
+BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
