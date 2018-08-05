@@ -3,8 +3,8 @@
 %define debug_package %{nil}
 
 Name:			sfml
-Version:		2.4.2
-Release:		3
+Version:		2.5.0
+Release:		1
 
 %define	major		%(echo %{version} |cut -d. -f1)
 %define	minor		%(echo %{version} |cut -d. -f2)
@@ -27,9 +27,7 @@ URL:		http://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
 Source3:	sfml.rpmlintrc
-# patch for link failue __cpu_model undefined.  Adjusted to
-# work with clang
-Patch1:		3383b4a472f0bd16a8161fb8760cd3e6333f1782.patch
+Patch0:		sfml-2.5.0-fix-linkage.patch
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(freetype2)
@@ -43,8 +41,8 @@ BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
 #for samples
-BuildRequires:	qt4-devel
-BuildRequires:	wxgtku-devel
+#BuildRequires:	qt4-devel
+#BuildRequires:	wxgtku-devel
 
 %description
 SFML is a portable and easy to use multimedia API written in C++.
@@ -169,8 +167,7 @@ Dynamic libraries from %{name}-window.
 
 
 %prep
-%setup -q -a1 -n SFML-%{version}
-%apply_patches
+%autosetup -p1 -a1 -n SFML-%{version}
 %cmake \
 	-DSFML_BUILD_EXAMPLES:BOOL=ON \
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
@@ -185,7 +182,7 @@ DESTDIR=%{buildroot} ninja -C build install
 %files
 %defattr(0644,root,root,0755)
 %dir %{_datadir}/SFML
-%{_datadir}/SFML/*.txt
+%{_datadir}/SFML/*.md
 
 ##############################
 # C++ libs
@@ -216,13 +213,14 @@ DESTDIR=%{buildroot} ninja -C build install
 %defattr(0644,root,root,0755)
 %dir %{_includedir}/SFML
 %{_includedir}/SFML/Config.hpp
+%{_includedir}/SFML/GpuPreference.hpp
 %{_includedir}/SFML/System.hpp
 %{_includedir}/SFML/Main.hpp
 %{_includedir}/SFML/System
 %{_libdir}/libsfml-system.so
 %{_libdir}/pkgconfig/sfml-all.pc
 %{_libdir}/pkgconfig/sfml-system.pc
-%{_datadir}/SFML/cmake
+%{_prefix}/lib/cmake/SFML
 
 %files -n %{develname_w}
 %defattr(0644,root,root,0755)
