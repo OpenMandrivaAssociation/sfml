@@ -3,8 +3,8 @@
 %define debug_package %{nil}
 
 Name:			sfml
-Version:		2.5.0
-Release:		2
+Version:	2.5.1
+Release:	1
 
 %define	major		%(echo %{version} |cut -d. -f1)
 %define	minor		%(echo %{version} |cut -d. -f2)
@@ -223,7 +223,7 @@ DESTDIR=%{buildroot} ninja -C build install
 %{_libdir}/libsfml-system.so
 %{_libdir}/pkgconfig/sfml-all.pc
 %{_libdir}/pkgconfig/sfml-system.pc
-%{_prefix}/lib/cmake/SFML
+%{_libdir}/cmake/SFML
 
 %files -n %{develname_w}
 %defattr(0644,root,root,0755)
