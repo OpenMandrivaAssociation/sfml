@@ -1,26 +1,23 @@
-%define	_duplicate_files_terminate_build 0
+%define _duplicate_files_terminate_build 0
+%global optflags %{optflags} -O3
 
-%define debug_package %{nil}
-
-Name:			sfml
-Version:	2.5.1
-Release:	1
-
-%define	major		%(echo %{version} |cut -d. -f1)
-%define	minor		%(echo %{version} |cut -d. -f2)
-
-%define	libname_a	%mklibname sfml-audio %{major}.%{minor}
-%define develname_a	%mklibname sfml-audio -d
-%define	libname_g	%mklibname sfml-graphics %{major}.%{minor}
-%define develname_g	%mklibname sfml-graphics -d
-%define	libname_n	%mklibname sfml-network %{major}.%{minor}
-%define develname_n	%mklibname sfml-network -d
-%define	libname_s	%mklibname sfml-system %{major}.%{minor}
-%define develname_s	%mklibname sfml-system -d
-%define	libname_w	%mklibname sfml-window %{major}.%{minor}
-%define develname_w	%mklibname sfml-window -d
+%define major %(echo %{version} |cut -d. -f1)
+%define minor %(echo %{version} |cut -d. -f2)
+%define libname_a %mklibname sfml-audio %{major}.%{minor}
+%define develname_a %mklibname sfml-audio -d
+%define libname_g %mklibname sfml-graphics %{major}.%{minor}
+%define develname_g %mklibname sfml-graphics -d
+%define libname_n %mklibname sfml-network %{major}.%{minor}
+%define develname_n %mklibname sfml-network -d
+%define libname_s %mklibname sfml-system %{major}.%{minor}
+%define develname_s %mklibname sfml-system -d
+%define libname_w %mklibname sfml-window %{major}.%{minor}
+%define develname_w %mklibname sfml-window -d
 
 Summary:	Simple and Fast Multimedia Library
+Name:		sfml
+Version:	2.5.1
+Release:	2
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://www.sfml-dev.org/
@@ -71,7 +68,7 @@ Summary:	Examples for the %{name} library
 Group:		Development/C++
 
 %description examples
-Examples for the %{name} library
+Examples for the %{name} library.
 
 %files examples
 %{_datadir}/SFML/examples
@@ -168,19 +165,19 @@ Provides:	%{name}-window = %{version}-%{release}
 %description -n %{libname_w}
 Dynamic libraries from %{name}-window.
 
-
 %prep
 %autosetup -p1 -a1 -n SFML-%{version}
+
 %cmake \
 	-DSFML_BUILD_EXAMPLES:BOOL=ON \
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
 	-G Ninja
 
 %build
-ninja -C build
+%ninja -C build
 
 %install
-DESTDIR=%{buildroot} ninja -C build install
+%ninja_install -C build
 
 %files
 %defattr(0644,root,root,0755)
