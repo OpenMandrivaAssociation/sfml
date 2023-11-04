@@ -16,15 +16,14 @@
 
 Summary:	Simple and Fast Multimedia Library
 Name:		sfml
-Version:	2.5.1
-Release:	4
+Version:	2.6.0
+Release:	1
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
 Source3:	sfml.rpmlintrc
-Patch0:		sfml-2.5.0-fix-linkage.patch
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(freetype2)
@@ -61,17 +60,17 @@ The library is divided in 5 small packages :
  - system
  - window
 
-This package contains documentation and samples.
-
 %package examples
-Summary:	Examples for the %{name} library
-Group:		Development/C++
+Summary:       Documentation and examples for the %{name} library
+Group:         Development/C++
 
 %description examples
-Examples for the %{name} library.
+Documentation and examples for the %{name} library.
 
 %files examples
-%{_datadir}/SFML/examples
+%doc examples
+%doc %{_docdir}/SFML
+
 
 ########################################################
 # C++ libs
@@ -171,6 +170,8 @@ Dynamic libraries from %{name}-window.
 %cmake \
 	-DSFML_BUILD_EXAMPLES:BOOL=ON \
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
+	-DSFML_USE_DRM:BOOL=ON \
+	-DSFML_USE_SYSTEM_DEPS:BOOL=ON \
 	-G Ninja
 
 %build
@@ -181,8 +182,6 @@ Dynamic libraries from %{name}-window.
 
 %files
 %defattr(0644,root,root,0755)
-%dir %{_datadir}/SFML
-%{_datadir}/SFML/*.md
 
 ##############################
 # C++ libs
