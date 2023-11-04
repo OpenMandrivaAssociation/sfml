@@ -16,7 +16,7 @@
 
 Summary:	Simple and Fast Multimedia Library
 Name:		sfml
-Version:	2.6.0
+Version:	2.6.1
 Release:	1
 License:	zlib/libpng License
 Group:		System/Libraries
@@ -37,6 +37,7 @@ BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(libdrm)
+BuildRequires:	pkgconfig(gbm)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
