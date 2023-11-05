@@ -17,7 +17,7 @@
 Summary:	Simple and Fast Multimedia Library
 Name:		sfml
 Version:	2.6.1
-Release:	1
+Release:	2
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		http://www.sfml-dev.org/
@@ -169,10 +169,15 @@ Dynamic libraries from %{name}-window.
 %prep
 %autosetup -p1 -a1 -n SFML-%{version}
 
+# FIXME we should probably enable SFML_USE_DRM
+# at some point -- but as of 2.6.1, it breaks things badly
+# (launching extremetuxracer results in an infinite loop of
+# "Failed to activate the window's context").
+# Don't enable DRM without first making sure this is fixed.
 %cmake \
 	-DSFML_BUILD_EXAMPLES:BOOL=ON \
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
-	-DSFML_USE_DRM:BOOL=ON \
+	-DSFML_USE_DRM:BOOL=OFF \
 	-DSFML_USE_SYSTEM_DEPS:BOOL=ON \
 	-G Ninja
 
