@@ -38,6 +38,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(libdrm)
 BuildRequires:	pkgconfig(gbm)
+BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
