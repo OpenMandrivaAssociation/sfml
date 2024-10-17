@@ -20,7 +20,7 @@ Version:	2.6.1
 Release:	2
 License:	zlib/libpng License
 Group:		System/Libraries
-URL:		http://www.sfml-dev.org/
+URL:		https://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
 Source3:	sfml.rpmlintrc
