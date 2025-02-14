@@ -17,7 +17,7 @@
 Summary:	Simple and Fast Multimedia Library
 Name:		sfml
 Version:	2.6.2
-Release:	1
+Release:	2
 License:	zlib/libpng License
 Group:		System/Libraries
 URL:		https://www.sfml-dev.org/
