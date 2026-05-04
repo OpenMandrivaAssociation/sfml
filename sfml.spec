@@ -16,7 +16,7 @@
 
 Summary:	Simple and Fast Multimedia Library
 Name:		sfml
-Version:	3.0.2
+Version:	3.1.0
 Release:	1
 License:	zlib/libpng License
 Group:		System/Libraries
