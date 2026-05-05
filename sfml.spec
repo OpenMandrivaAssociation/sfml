@@ -40,6 +40,7 @@ BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(libdrm)
 BuildRequires:	pkgconfig(gbm)
 BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	cmake(MbedTLS)
 BuildRequires:	recode
 BuildRequires:	cmake
 BuildRequires:	ninja
