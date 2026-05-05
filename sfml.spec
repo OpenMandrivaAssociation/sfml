@@ -23,6 +23,8 @@ Group:		System/Libraries
 URL:		https://www.sfml-dev.org/
 Source0:	http://www.sfml-dev.org/files/SFML-%{version}-sources.zip
 Source1:	http://www.sfml-dev.org/files/SFML-%{version}-doc.zip
+# Exact requested version see src/SFML/Graphics/CMakeLists.txt
+Source2:	https://github.com/Tehreer/SheenBidi/archive/refs/tags/v3.0.0.tar.gz
 Source3:	sfml.rpmlintrc
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
@@ -172,6 +174,10 @@ Dynamic libraries from %{name}-window.
 
 %prep
 %autosetup -p1 -a1 -n SFML-%{version}
+tar xf %{S:2}
+mkdir -p build/_deps
+mv SheenBidi-* build/_deps/sheenbidi-src
+cmake -DSHEENBIDI_DIR=$(pwd)/build/_deps/sheenbidi-src -P $(pwd)/tools/sheenbidi/PatchSheenBidi.cmake
 
 # FIXME we should probably enable SFML_USE_DRM
 # at some point -- but as of 2.6.1, it breaks things badly
@@ -183,6 +189,8 @@ Dynamic libraries from %{name}-window.
 	-DSFML_INSTALL_PKGCONFIG_FILES:BOOL=ON \
 	-DSFML_USE_DRM:BOOL=OFF \
 	-DSFML_USE_SYSTEM_DEPS:BOOL=ON \
+	-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON \
+	-DFETCHCONTENT_SOURCE_DIR_SHEENBIDI=$(pwd)/_deps/sheenbidi-src \
 	-G Ninja
 
 %build
